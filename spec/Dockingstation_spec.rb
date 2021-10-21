@@ -35,5 +35,11 @@ describe Dockingstation do
     it "has deafult capacity in docking station" do
       expect(subject.capacity).to eq Dockingstation::DEFAULT_CAPACITY
     end
+    it "can let us return broken bike" do
+      bike = Bike.new(false)
+      subject.dock(bike)
+      expect(subject.release_bike).not_to eq bike 
+      #currently can still take it out will need to chang expectation
+    end
   end
         
