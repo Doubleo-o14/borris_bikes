@@ -7,6 +7,11 @@ describe Dockingstation do
     it "does not take out bikes when there are no bikes" do
       expect { subject.release_bike }.to raise_error 'no bikes available'
     end
+
+    it "does does not dock a bike when capacity is full" do
+      subject.dock(Bike.new)
+      expect { subject.dock(Bike.new) }.to raise_error "capacity is full"
+    end
       
 
     it "can tell us if bike is working" do
