@@ -10,7 +10,7 @@ describe Dockingstation do
 
     it "does does not dock a bike when capacity is full" do
       Dockingstation::DEFAULT_CAPACITY.times { subject.dock Bike.new }
-      expect { subject.dock(Bike.new) }.to raise_error "capacity is full"
+      expect { subject.dock(Bike.new) }.to raise_error 'capacity is full'
     end
       
 
@@ -23,7 +23,17 @@ describe Dockingstation do
     it "can dock the bikes" do
       bike = Bike.new
       subject.dock(bike)
-      expect(subject.bike_storage.last).to eq bike
-  end 
-end
+      expect(subject.release_bike).to eq bike
+  end
+  describe 'initialization' do
+    it 'has a variable capacity' do
+      docking_station = Dockingstation.new(50)
+      50.times { docking_station.dock Bike.new }
+      expect{ docking_station.dock Bike.new }.to raise_error 'capacity is full'
+    end
+  end
+    it "has deafult capacity in docking station" do
+      expect(subject.capacity).to eq Dockingstation::DEFAULT_CAPACITY
+    end
+  end
         
